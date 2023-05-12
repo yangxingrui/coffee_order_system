@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div style="width:100%;text-align:center">
+        <h2>Order List</h2>
+        <table style="width: 60%;margin:auto">
+            <thead>
+            <tr>
+                <th>orderId</th>
+                <th>createTime</th>
+                <th>updateTime</th>
+                <th>customer</th>
+                <th>coffeeId</th>
+                <th>name</th>
+                <th>price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order : ${bigTableList}">
+                <td th:text="${order.orderId}"></td>
+                <td th:text="${#dates.format(order.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+                <td th:text="${#dates.format(order.updateTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+                <td th:text="${order.customer}"></td>
+                <td th:text="${order.coffeeId}"></td>
+                <td th:text="${order.name}"></td>
+                <td th:text="${order.price}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

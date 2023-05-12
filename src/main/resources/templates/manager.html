@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>manager</title>
+    <div class="text" style="text-align: center">
+        <h2>Coffee List Manage</h2>
+        <form action="#" th:action="@{logout}" method="get">
+            <input type="submit" value="登出"/>
+        </form>
+    </div>
+</head>
+<body>
+<div style="width:100%;text-align:center">
+    <h2>Coffee Available Today</h2>
+    <table style="width: 40%;margin:auto">
+        <thead>
+        <tr>
+            <th>Coffee Name</th>
+            <th>Price</th>
+            <th>operation</th>
+        </tr>
+        </thead>
+        <tbody style="">
+        <tr th:each="coffee : ${coffeeList}">
+            <form action="#" th:action="@{/coffee/update/{id}(id=${coffee.getId()})}" method="post">
+                <td><input th:value="${coffee.name}" th:name="name"/></td>
+                <td th:text="${coffee.price}"></td>
+                <td><input type="submit" value="修改咖啡"/></td>
+            </form>
+        </tr>
+        </tbody>
+    </table>
+    <h2>Insert Coffee Here</h2>
+    <form action="#" th:action="@{/coffee/save}" method="post">
+        <td><input th:name="name"/></td>
+        <td><input th:name="price"/></td>
+        <td><input type="submit" value="添加咖啡"/></td>
+    </form>
+</div>
+<div style="width:100%;text-align:center">
+    <h2>Order List Manage</h2>
+    <table style="width: 80%;margin:auto">
+        <thead>
+        <tr>
+            <th>orderId</th>
+            <th>createTime</th>
+            <th>updateTime</th>
+            <th>customer</th>
+            <th>coffeeId</th>
+            <th>name</th>
+            <th>price</th>
+            <th>operation</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${bigTableList}">
+            <td th:text="${order.orderId}"></td>
+            <td th:text="${#dates.format(order.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${#dates.format(order.updateTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${order.customer}"></td>
+            <td th:text="${order.coffeeId}"></td>
+            <td th:text="${order.name}"></td>
+            <td th:text="${order.price}"></td>
+            <td><a class="btn btn-warning" th:href="@{/order/delete/{id}(id=${order.getOrderId()})}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

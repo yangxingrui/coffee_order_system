@@ -1,0 +1,36 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <div style="width:100%;text-align:center">
+            <h2>Coffee Available Today</h2>
+            <table style="width: 15%;margin:auto">
+                <thead>
+                <tr>
+                    <th>Coffee Name</th>
+                    <th>Price</th>
+                </tr>
+                </thead>
+                <tbody style="">
+                <tr th:each="coffee : ${coffeeList}">
+                    <form>
+                        <td th:text="${coffee.name}"/></td>
+                        <td th:text="${coffee.price}"></td>
+                    </form>
+                </tr>
+                </tbody>
+            </table>
+            <h2>Your Order</h2>
+            <form action="#" th:action="@{/coffee/}" method="post">
+                <label>Customer Name</label>
+                <input type="text" name="customer" />
+                <ul>
+                    <li th:each="coffee : ${coffeeList}">
+                        <input type="checkbox" name="items" th:value="${coffee.id}" />
+                        <label th:text="${coffee.name}"></label>
+                    </li>
+                </ul>
+                <input type="submit" value="提交订单"/>
+                <p th:text="${message}">Message</p>
+            </form>
+        </div>
+    </body>
+</html>
